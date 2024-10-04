@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Student List</title>
+</head>
+<body>
+<h1>Student List</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Kana Name</th>
+    <th>Nickname</th>
+    <th>Email</th>
+    <th>Region</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>Remark</th>
+    <th>Is Deleted</th>
+    <th>Courses</th>
+    <th>キャンセル</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="studentDetail : ${studentList}">
+    <td th:text="${studentDetail.student.id}">1</td>
+    <td>
+      <a href="/studentList" th:href="@{/student/{id}(id=${studentDetail.student.id})"
+         th:text="${studentDetail.student.name}">山田太郎</a>
+    </td>
+    <td th:text="${studentDetail.student.kanaName}">ヤマダタロウ</td>
+    <td th:text="${studentDetail.student.nickname}">タロー</td>
+    <td th:text="${studentDetail.student.email}">taro@example.com</td>
+    <td th:text="${studentDetail.student.region}">東京</td>
+    <td th:text="${studentDetail.student.age}">20</td>
+    <td th:text="${studentDetail.student.gender}">男性</td>
+    <td th:text="${studentDetail.student.remark}">特になし</td>
+    <td th:text="${studentDetail.student.isDeleted ? 'Yes' : 'No'}"></td>
+    <td>
+      <input type="checkbox" th:field="${studentDetail.student.isDeleted}" />
+    </td>
+      <ul>
+        <li th:each="course : ${detail.studentsCourses}"
+            th:text="${course.courseId}"></li>
+      </ul>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
